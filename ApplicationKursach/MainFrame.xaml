@@ -1,0 +1,28 @@
+﻿<Page x:Class="ApplicationKursach.MainFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationKursach"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainFrame">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="61*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button x:Name="Playlist_Button" Click="Playlist_Button_Click" Content="Плейлисты" Height="50" Cursor="Hand"></Button>
+            <Button x:Name="Albums_Button" Click="Albums_Button_Click" Content="Альбомы" Height="50"></Button>
+            <Button x:Name="Music_Button" Click="Music_Button_Click" Content="Музыка" Height="50"></Button>
+            <Button x:Name="AddPlaylist" Click="AddPlaylist_Click" Content="Добавить Плейлист" Height="50"/>
+            <Button x:Name="Add_Button" Click="Add_Button_Click" Content="Добавить песню" Height="50"></Button>
+        </StackPanel>
+        <TextBlock x:Name="CurrentUser" Text="{Binding Login}" Grid.Row="0" HorizontalAlignment="Left" Margin="698,0,0,0" FontSize="15"/>
+        <Button x:Name="Exit" Content="Выйти" HorizontalAlignment="Right" Click="ExitButton_Click"/>
+        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" Name="Music"></Frame>
+        <Frame Grid.RowSpan="2" x:Name="MainFrameAll"/>
+    </Grid>
+</Page>

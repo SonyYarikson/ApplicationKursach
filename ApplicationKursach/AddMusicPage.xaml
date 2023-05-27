@@ -1,0 +1,44 @@
+﻿<Page x:Class="ApplicationKursach.AddMusicPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationKursach"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddMusicPage" Background="White" IsVisibleChanged="AddMusic_IsVisibleChanged">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="SongName" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <TextBlock Text="Название песни" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <ComboBox  DisplayMemberPath="Name" x:Name="AuthorName" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <Button x:Name="AddAuthor" Click="AddAuthor_Click" Content="Добавить автора" Width="110" Margin="584,26,216,17" Grid.Row="1" FontSize="9"/>
+        <TextBlock Text="Автор" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <ComboBox DisplayMemberPath="Name" x:Name="PerformerName" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0" SelectionChanged="PerformerName_SelectionChanged"/>
+        <TextBlock Text="Исполнители" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <Button x:Name="AddPerformer" Click="AddPerformer_Click" Content="Добавить исполнителя" Width="130" Margin="604,26,216,17" Grid.Row="2" FontSize="9"/>
+        <TextBlock x:Name="SongCover" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <TextBlock Text="Обложка" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <Button x:Name="Filelist" Click="FilelistPhoto_Click" Content="..." Grid.Row="3" Width="40" Margin="544,26,216,17" />
+        <TextBox x:Name="SongGenre" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <TextBlock Text="Жанр" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <TextBlock x:Name="SongFile" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <TextBlock Text="Файл песни" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <Button x:Name="Filelist2" Click="Filelist_Click" Content="..." Grid.Row="5" Width="40" Margin="544,26,216,17" />
+        <TextBlock Text="Альбом" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <ComboBox x:Name="AddAlbum" Grid.Row="6" DisplayMemberPath="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <Button x:Name="AddNewAlbum" Click="AddNewAlbum_Click" Content="Добавить альбом" Grid.Row="6" Width="110" Margin="584,26,216,17" FontSize="9"/>
+        <Button x:Name="Savebutton" Click="Savebutton_Click" Grid.Row="7" Content="Добавить песню" Cursor="Hand" />
+        <Frame Grid.RowSpan="8" x:Name="AddNew"/>
+    </Grid>
+</Page>

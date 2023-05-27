@@ -1,0 +1,47 @@
+﻿<Page x:Class="ApplicationKursach.Music"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationKursach"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Music" Background="White" IsVisibleChanged="Music_IsVisibleChanged">
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <DataGrid x:Name="MusicGrid" AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="True">
+                <DataGrid.Resources>
+                    <local:NullToImageConverter x:Key="NullToImageConverter"/>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Play_Button_Click" Content=">"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Stop_Button_Click" Content="||"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Обложка" Width="SizeToCells" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Cover, Converter={StaticResource NullToImageConverter}}" Stretch="UniformToFill" Width="100" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Название трека" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Исполнители" Binding="{Binding PerformersName}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Прослушивания" Binding="{Binding Obedience}" Width="100"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Файл" Binding="{Binding song_file}" Width="100" Visibility="Hidden"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

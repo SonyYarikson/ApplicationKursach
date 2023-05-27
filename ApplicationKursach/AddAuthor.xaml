@@ -1,0 +1,27 @@
+﻿<Page x:Class="ApplicationKursach.AddAuthor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationKursach"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddAuthor" Background="White" >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="AuthorName" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <TextBlock Text="Имя Автора" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <TextBox x:Name="AuthorDescription" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Margin="0,20,0,0"/>
+        <TextBlock Text="Описание к автору" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <TextBlock Text="Фото" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,40"/>
+        <Button x:Name="AuthorPhoto" Click="AuthorPhoto_Click" Content="..." Grid.Row="2" Width="40" Margin="544,26,216,17" />
+        <Button x:Name="SaveAuthor" Click="SaveAuthor_click" Grid.Row="3" Content="Добавить Автора" Cursor="Hand" />
+        <Frame x:Name="AddAuthorFrame" Grid.RowSpan="4"/>
+    </Grid>
+</Page>

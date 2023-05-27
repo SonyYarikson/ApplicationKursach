@@ -1,0 +1,854 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KURSACHModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album_description">
+          <Key>
+            <PropertyRef Name="id_album" />
+          </Key>
+          <Property Name="id_album" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="Release_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Albums">
+          <Key>
+            <PropertyRef Name="id_record" />
+          </Key>
+          <Property Name="id_record" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_album" Type="int" Nullable="false" />
+          <Property Name="id_song" Type="int" Nullable="false" />
+          <Property Name="song_file" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="id_Author" />
+          </Key>
+          <Property Name="id_Author" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Performers">
+          <Key>
+            <PropertyRef Name="id_performer" />
+          </Key>
+          <Property Name="id_performer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Performers_and_Albums">
+          <Key>
+            <PropertyRef Name="id_record_performer" />
+          </Key>
+          <Property Name="id_record_performer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_record" Type="int" Nullable="false" />
+          <Property Name="id_performer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Playlist_description">
+          <Key>
+            <PropertyRef Name="id_playlist" />
+          </Key>
+          <Property Name="id_playlist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="Creation_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Playlists">
+          <Key>
+            <PropertyRef Name="id_PlaylistRecord" />
+          </Key>
+          <Property Name="id_PlaylistRecord" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_playlist" Type="int" Nullable="false" />
+          <Property Name="id_record" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="id_song" />
+          </Key>
+          <Property Name="id_song" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Author" Type="int" Nullable="false" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Release_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Registration_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KURSACH.dbo.PlaylistDataGrid" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PlaylistDataGrid">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Obedience" />
+            <PropertyRef Name="Creation_date" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="Creation_date" Type="date" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KURSACH.dbo.SongsDataGrid" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SongsDataGrid">
+          <Key>
+            <PropertyRef Name="id_song" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Obedience" />
+          </Key>
+          <Property Name="id_song" Type="int" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PerformersName" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="song_file" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KURSACH.dbo.SongsInAlbumsDataGrid" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SongsInAlbumsDataGrid">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="SongName" />
+            <PropertyRef Name="Obedience" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SongName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="PerformersName" Type="nvarchar" MaxLength="4000" />
+          <Property Name="song_file" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KURSACH.dbo.SongsInPlaylistsDataGrid" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SongsInPlaylistsDataGrid">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="SongName" />
+            <PropertyRef Name="Obedience" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SongName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Obedience" Type="int" Nullable="false" />
+          <Property Name="Cover" Type="varbinary(max)" />
+          <Property Name="PerformersName" Type="nvarchar" MaxLength="4000" />
+          <Property Name="song_file" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Albums__id_album__2D27B809">
+          <End Role="Album_description" Type="Self.Album_description" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album_description">
+              <PropertyRef Name="id_album" />
+            </Principal>
+            <Dependent Role="Albums">
+              <PropertyRef Name="id_album" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Albums__id_song__2E1BDC42">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="id_song" />
+            </Principal>
+            <Dependent Role="Albums">
+              <PropertyRef Name="id_song" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Performer__id_pe__30F848ED">
+          <End Role="Performers" Type="Self.Performers" Multiplicity="1" />
+          <End Role="Performers_and_Albums" Type="Self.Performers_and_Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performers">
+              <PropertyRef Name="id_performer" />
+            </Principal>
+            <Dependent Role="Performers_and_Albums">
+              <PropertyRef Name="id_performer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Performer__id_re__31EC6D26">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Performers_and_Albums" Type="Self.Performers_and_Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="id_record" />
+            </Principal>
+            <Dependent Role="Performers_and_Albums">
+              <PropertyRef Name="id_record" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlists__id_pl__3C69FB99">
+          <End Role="Playlist_description" Type="Self.Playlist_description" Multiplicity="1" />
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlist_description">
+              <PropertyRef Name="id_playlist" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="id_playlist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlists__id_re__3D5E1FD2">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="id_record" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="id_record" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlists__id_us__3B75D760">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Songs__Release_d__2A4B4B5E">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="id_Author" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="id_Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__Registrat__36B12243">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KURSACHModelContainer">
+          <EntitySet Name="Album_description" EntityType="Self.Album_description" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Performers" EntityType="Self.Performers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Performers_and_Albums" EntityType="Self.Performers_and_Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Playlist_description" EntityType="Self.Playlist_description" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Playlists" EntityType="Self.Playlists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Songs" EntityType="Self.Songs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaylistDataGrid" EntityType="Self.PlaylistDataGrid" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PlaylistDataGrid].[Name] AS [Name], 
+    [PlaylistDataGrid].[Obedience] AS [Obedience], 
+    [PlaylistDataGrid].[Cover] AS [Cover], 
+    [PlaylistDataGrid].[Creation_date] AS [Creation_date], 
+    [PlaylistDataGrid].[Username] AS [Username]
+    FROM [dbo].[PlaylistDataGrid] AS [PlaylistDataGrid]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SongsDataGrid" EntityType="Self.SongsDataGrid" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SongsDataGrid].[id_song] AS [id_song], 
+    [SongsDataGrid].[Cover] AS [Cover], 
+    [SongsDataGrid].[Name] AS [Name], 
+    [SongsDataGrid].[PerformersName] AS [PerformersName], 
+    [SongsDataGrid].[Obedience] AS [Obedience], 
+    [SongsDataGrid].[song_file] AS [song_file]
+    FROM [dbo].[SongsDataGrid] AS [SongsDataGrid]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SongsInAlbumsDataGrid" EntityType="Self.SongsInAlbumsDataGrid" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SongsInAlbumsDataGrid].[Name] AS [Name], 
+    [SongsInAlbumsDataGrid].[SongName] AS [SongName], 
+    [SongsInAlbumsDataGrid].[Obedience] AS [Obedience], 
+    [SongsInAlbumsDataGrid].[Cover] AS [Cover], 
+    [SongsInAlbumsDataGrid].[PerformersName] AS [PerformersName], 
+    [SongsInAlbumsDataGrid].[song_file] AS [song_file]
+    FROM [dbo].[SongsInAlbumsDataGrid] AS [SongsInAlbumsDataGrid]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SongsInPlaylistsDataGrid" EntityType="Self.SongsInPlaylistsDataGrid" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SongsInPlaylistsDataGrid].[Name] AS [Name], 
+    [SongsInPlaylistsDataGrid].[SongName] AS [SongName], 
+    [SongsInPlaylistsDataGrid].[Obedience] AS [Obedience], 
+    [SongsInPlaylistsDataGrid].[Cover] AS [Cover], 
+    [SongsInPlaylistsDataGrid].[PerformersName] AS [PerformersName], 
+    [SongsInPlaylistsDataGrid].[song_file] AS [song_file]
+    FROM [dbo].[SongsInPlaylistsDataGrid] AS [SongsInPlaylistsDataGrid]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Albums__id_album__2D27B809" Association="Self.FK__Albums__id_album__2D27B809">
+            <End Role="Album_description" EntitySet="Album_description" />
+            <End Role="Albums" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Albums__id_song__2E1BDC42" Association="Self.FK__Albums__id_song__2E1BDC42">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="Albums" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Performer__id_pe__30F848ED" Association="Self.FK__Performer__id_pe__30F848ED">
+            <End Role="Performers" EntitySet="Performers" />
+            <End Role="Performers_and_Albums" EntitySet="Performers_and_Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Performer__id_re__31EC6D26" Association="Self.FK__Performer__id_re__31EC6D26">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Performers_and_Albums" EntitySet="Performers_and_Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlists__id_pl__3C69FB99" Association="Self.FK__Playlists__id_pl__3C69FB99">
+            <End Role="Playlist_description" EntitySet="Playlist_description" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlists__id_re__3D5E1FD2" Association="Self.FK__Playlists__id_re__3D5E1FD2">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlists__id_us__3B75D760" Association="Self.FK__Playlists__id_us__3B75D760">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Songs__Release_d__2A4B4B5E" Association="Self.FK__Songs__Release_d__2A4B4B5E">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__Registrat__36B12243" Association="Self.FK__Users__Registrat__36B12243">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KURSACHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album_description">
+          <Key>
+            <PropertyRef Name="id_album" />
+          </Key>
+          <Property Name="id_album" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Release_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Albums" Relationship="Self.FK__Albums__id_album__2D27B809" FromRole="Album_description" ToRole="Albums" />
+        </EntityType>
+        <EntityType Name="Albums">
+          <Key>
+            <PropertyRef Name="id_record" />
+          </Key>
+          <Property Name="id_record" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_album" Type="Int32" Nullable="false" />
+          <Property Name="id_song" Type="Int32" Nullable="false" />
+          <Property Name="song_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Album_description" Relationship="Self.FK__Albums__id_album__2D27B809" FromRole="Albums" ToRole="Album_description" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK__Albums__id_song__2E1BDC42" FromRole="Albums" ToRole="Songs" />
+          <NavigationProperty Name="Performers_and_Albums" Relationship="Self.FK__Performer__id_re__31EC6D26" FromRole="Albums" ToRole="Performers_and_Albums" />
+          <NavigationProperty Name="Playlists" Relationship="Self.FK__Playlists__id_re__3D5E1FD2" FromRole="Albums" ToRole="Playlists" />
+        </EntityType>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="id_Author" />
+          </Key>
+          <Property Name="id_Author" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK__Songs__Release_d__2A4B4B5E" FromRole="Authors" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="Performers">
+          <Key>
+            <PropertyRef Name="id_performer" />
+          </Key>
+          <Property Name="id_performer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Performers_and_Albums" Relationship="Self.FK__Performer__id_pe__30F848ED" FromRole="Performers" ToRole="Performers_and_Albums" />
+        </EntityType>
+        <EntityType Name="Performers_and_Albums">
+          <Key>
+            <PropertyRef Name="id_record_performer" />
+          </Key>
+          <Property Name="id_record_performer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_record" Type="Int32" Nullable="false" />
+          <Property Name="id_performer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Albums" Relationship="Self.FK__Performer__id_re__31EC6D26" FromRole="Performers_and_Albums" ToRole="Albums" />
+          <NavigationProperty Name="Performers" Relationship="Self.FK__Performer__id_pe__30F848ED" FromRole="Performers_and_Albums" ToRole="Performers" />
+        </EntityType>
+        <EntityType Name="Playlist_description">
+          <Key>
+            <PropertyRef Name="id_playlist" />
+          </Key>
+          <Property Name="id_playlist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Playlists" Relationship="Self.FK__Playlists__id_pl__3C69FB99" FromRole="Playlist_description" ToRole="Playlists" />
+        </EntityType>
+        <EntityType Name="Playlists">
+          <Key>
+            <PropertyRef Name="id_PlaylistRecord" />
+          </Key>
+          <Property Name="id_PlaylistRecord" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_playlist" Type="Int32" Nullable="false" />
+          <Property Name="id_record" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Albums" Relationship="Self.FK__Playlists__id_re__3D5E1FD2" FromRole="Playlists" ToRole="Albums" />
+          <NavigationProperty Name="Playlist_description" Relationship="Self.FK__Playlists__id_pl__3C69FB99" FromRole="Playlists" ToRole="Playlist_description" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Playlists__id_us__3B75D760" FromRole="Playlists" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__Registrat__36B12243" FromRole="Registration" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="id_song" />
+          </Key>
+          <Property Name="id_song" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Author" Type="Int32" Nullable="false" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Release_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Albums" Relationship="Self.FK__Albums__id_song__2E1BDC42" FromRole="Songs" ToRole="Albums" />
+          <NavigationProperty Name="Authors" Relationship="Self.FK__Songs__Release_d__2A4B4B5E" FromRole="Songs" ToRole="Authors" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Registration_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Playlists" Relationship="Self.FK__Playlists__id_us__3B75D760" FromRole="Users" ToRole="Playlists" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK__Users__Registrat__36B12243" FromRole="Users" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="PlaylistDataGrid">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Obedience" />
+            <PropertyRef Name="Creation_date" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SongsDataGrid">
+          <Key>
+            <PropertyRef Name="id_song" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Obedience" />
+          </Key>
+          <Property Name="id_song" Type="Int32" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PerformersName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="song_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SongsInAlbumsDataGrid">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="SongName" />
+            <PropertyRef Name="Obedience" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PerformersName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="song_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SongsInPlaylistsDataGrid">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="SongName" />
+            <PropertyRef Name="Obedience" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Obedience" Type="Int32" Nullable="false" />
+          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PerformersName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="song_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Albums__id_album__2D27B809">
+          <End Role="Album_description" Type="Self.Album_description" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album_description">
+              <PropertyRef Name="id_album" />
+            </Principal>
+            <Dependent Role="Albums">
+              <PropertyRef Name="id_album" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Albums__id_song__2E1BDC42">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="id_song" />
+            </Principal>
+            <Dependent Role="Albums">
+              <PropertyRef Name="id_song" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Performer__id_re__31EC6D26">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Performers_and_Albums" Type="Self.Performers_and_Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="id_record" />
+            </Principal>
+            <Dependent Role="Performers_and_Albums">
+              <PropertyRef Name="id_record" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlists__id_re__3D5E1FD2">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="id_record" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="id_record" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Songs__Release_d__2A4B4B5E">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="id_Author" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="id_Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Performer__id_pe__30F848ED">
+          <End Role="Performers" Type="Self.Performers" Multiplicity="1" />
+          <End Role="Performers_and_Albums" Type="Self.Performers_and_Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performers">
+              <PropertyRef Name="id_performer" />
+            </Principal>
+            <Dependent Role="Performers_and_Albums">
+              <PropertyRef Name="id_performer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlists__id_pl__3C69FB99">
+          <End Role="Playlist_description" Type="Self.Playlist_description" Multiplicity="1" />
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlist_description">
+              <PropertyRef Name="id_playlist" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="id_playlist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlists__id_us__3B75D760">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__Registrat__36B12243">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KURSACHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Album_description" EntityType="Self.Album_description" />
+          <EntitySet Name="Albums" EntityType="Self.Albums" />
+          <EntitySet Name="Authors" EntityType="Self.Authors" />
+          <EntitySet Name="Performers" EntityType="Self.Performers" />
+          <EntitySet Name="Performers_and_Albums" EntityType="Self.Performers_and_Albums" />
+          <EntitySet Name="Playlist_description" EntityType="Self.Playlist_description" />
+          <EntitySet Name="Playlists" EntityType="Self.Playlists" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" />
+          <EntitySet Name="Songs" EntityType="Self.Songs" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="PlaylistDataGrid" EntityType="Self.PlaylistDataGrid" />
+          <EntitySet Name="SongsDataGrid" EntityType="Self.SongsDataGrid" />
+          <EntitySet Name="SongsInAlbumsDataGrid" EntityType="Self.SongsInAlbumsDataGrid" />
+          <EntitySet Name="SongsInPlaylistsDataGrid" EntityType="Self.SongsInPlaylistsDataGrid" />
+          <AssociationSet Name="FK__Albums__id_album__2D27B809" Association="Self.FK__Albums__id_album__2D27B809">
+            <End Role="Album_description" EntitySet="Album_description" />
+            <End Role="Albums" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Albums__id_song__2E1BDC42" Association="Self.FK__Albums__id_song__2E1BDC42">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="Albums" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Performer__id_re__31EC6D26" Association="Self.FK__Performer__id_re__31EC6D26">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Performers_and_Albums" EntitySet="Performers_and_Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlists__id_re__3D5E1FD2" Association="Self.FK__Playlists__id_re__3D5E1FD2">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Songs__Release_d__2A4B4B5E" Association="Self.FK__Songs__Release_d__2A4B4B5E">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Performer__id_pe__30F848ED" Association="Self.FK__Performer__id_pe__30F848ED">
+            <End Role="Performers" EntitySet="Performers" />
+            <End Role="Performers_and_Albums" EntitySet="Performers_and_Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlists__id_pl__3C69FB99" Association="Self.FK__Playlists__id_pl__3C69FB99">
+            <End Role="Playlist_description" EntitySet="Playlist_description" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlists__id_us__3B75D760" Association="Self.FK__Playlists__id_us__3B75D760">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__Registrat__36B12243" Association="Self.FK__Users__Registrat__36B12243">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KURSACHModelContainer" CdmEntityContainer="KURSACHEntities">
+          <EntitySetMapping Name="Album_description">
+            <EntityTypeMapping TypeName="KURSACHModel.Album_description">
+              <MappingFragment StoreEntitySet="Album_description">
+                <ScalarProperty Name="id_album" ColumnName="id_album" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Release_date" ColumnName="Release_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="KURSACHModel.Albums">
+              <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="id_record" ColumnName="id_record" />
+                <ScalarProperty Name="id_album" ColumnName="id_album" />
+                <ScalarProperty Name="id_song" ColumnName="id_song" />
+                <ScalarProperty Name="song_file" ColumnName="song_file" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="KURSACHModel.Authors">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="id_Author" ColumnName="id_Author" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Performers">
+            <EntityTypeMapping TypeName="KURSACHModel.Performers">
+              <MappingFragment StoreEntitySet="Performers">
+                <ScalarProperty Name="id_performer" ColumnName="id_performer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Performers_and_Albums">
+            <EntityTypeMapping TypeName="KURSACHModel.Performers_and_Albums">
+              <MappingFragment StoreEntitySet="Performers_and_Albums">
+                <ScalarProperty Name="id_record_performer" ColumnName="id_record_performer" />
+                <ScalarProperty Name="id_record" ColumnName="id_record" />
+                <ScalarProperty Name="id_performer" ColumnName="id_performer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Playlist_description">
+            <EntityTypeMapping TypeName="KURSACHModel.Playlist_description">
+              <MappingFragment StoreEntitySet="Playlist_description">
+                <ScalarProperty Name="id_playlist" ColumnName="id_playlist" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Creation_date" ColumnName="Creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="KURSACHModel.Playlists">
+              <MappingFragment StoreEntitySet="Playlists">
+                <ScalarProperty Name="id_PlaylistRecord" ColumnName="id_PlaylistRecord" />
+                <ScalarProperty Name="id_playlist" ColumnName="id_playlist" />
+                <ScalarProperty Name="id_record" ColumnName="id_record" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration">
+            <EntityTypeMapping TypeName="KURSACHModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="KURSACHModel.Songs">
+              <MappingFragment StoreEntitySet="Songs">
+                <ScalarProperty Name="id_song" ColumnName="id_song" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_Author" ColumnName="id_Author" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Release_date" ColumnName="Release_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KURSACHModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Registration_Date" ColumnName="Registration_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaylistDataGrid">
+            <EntityTypeMapping TypeName="KURSACHModel.PlaylistDataGrid">
+              <MappingFragment StoreEntitySet="PlaylistDataGrid">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Creation_date" ColumnName="Creation_date" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SongsDataGrid">
+            <EntityTypeMapping TypeName="KURSACHModel.SongsDataGrid">
+              <MappingFragment StoreEntitySet="SongsDataGrid">
+                <ScalarProperty Name="id_song" ColumnName="id_song" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PerformersName" ColumnName="PerformersName" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="song_file" ColumnName="song_file" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SongsInAlbumsDataGrid">
+            <EntityTypeMapping TypeName="KURSACHModel.SongsInAlbumsDataGrid">
+              <MappingFragment StoreEntitySet="SongsInAlbumsDataGrid">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SongName" ColumnName="SongName" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="PerformersName" ColumnName="PerformersName" />
+                <ScalarProperty Name="song_file" ColumnName="song_file" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SongsInPlaylistsDataGrid">
+            <EntityTypeMapping TypeName="KURSACHModel.SongsInPlaylistsDataGrid">
+              <MappingFragment StoreEntitySet="SongsInPlaylistsDataGrid">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SongName" ColumnName="SongName" />
+                <ScalarProperty Name="Obedience" ColumnName="Obedience" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="PerformersName" ColumnName="PerformersName" />
+                <ScalarProperty Name="song_file" ColumnName="song_file" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
